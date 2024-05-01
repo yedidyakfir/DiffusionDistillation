@@ -2,7 +2,6 @@ import abc
 import math
 
 import torch
-import torch.nn.functional as F
 from torch.nn import Module
 
 
@@ -84,7 +83,7 @@ class GaussianDiffusion:
         z = alpha_t * x_0 + sigma_t * noise
         v_recon = self.inference(z.float(), t.float(), extra_args)
         v = alpha_t * noise - sigma_t * x_0
-        return F.mse_loss(v_recon, v.float())
+        return torch.nn.functional.mse_loss(v_recon, v.float())
 
     def q_posterior(self, x_0, x_t, t):
         mean = (
@@ -187,4 +186,4 @@ class GaussianDiffusionDefault(GaussianDiffusion):
                 w = torch.pow(1 + alpha_s / sigma_s, self.gamma)
         v = student_diffusion.net_(z.float(), t.float() * self.time_scale, **extra_args).sample
         # my_rec = (alpha_s * z - sigma_s * v).clip(-1, 1)
-        return F.mse_loss(w * v.float(), w * v_2.float())
+        return torch.nn.functional.mse_loss(w * v.float(), w * v_2.float())
