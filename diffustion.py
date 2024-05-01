@@ -185,6 +185,6 @@ class GaussianDiffusionDefault(GaussianDiffusion):
                 w = 1
             else:
                 w = torch.pow(1 + alpha_s / sigma_s, self.gamma)
-        v = student_diffusion.net_(z.float(), t.float() * self.time_scale, **extra_args)
+        v = student_diffusion.net_(z.float(), t.float() * self.time_scale, **extra_args).sample
         # my_rec = (alpha_s * z - sigma_s * v).clip(-1, 1)
         return F.mse_loss(w * v.float(), w * v_2.float())
