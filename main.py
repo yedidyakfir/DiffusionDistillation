@@ -10,12 +10,13 @@ from torch.utils.data import RandomSampler
 from torchvision.transforms import transforms
 
 from diffustion import GaussianDiffusionDefault, make_beta_schedule
+from distillation import train_student
 
 
 @click.command()
 @click.option("--batch_size", default=1, type=int)
 @click.option("--num_iters", default=5000, type=int)
-@click.option("--device", default="cuda" if torch.cuda.is_available() else "cpu", type=int)
+@click.option("--device", default=0 if torch.cuda.is_available() else None, type=int)
 @click.option("--n_timestep", default=1000, type=int)
 @click.option("--time_scale", default=1000, type=int)
 @click.option("--lr", default=1.5e-5, type=float)
@@ -83,12 +84,3 @@ def main(
 
 if __name__ == "__main__":
     main()
-    # main(
-    #     batch_size=1,
-    #     num_iters=5000,
-    #     device=0 if torch.cuda.is_available() else "cpu",
-    #     n_timestep=1000,
-    #     time_scale=1000,
-    #     lr=1.5e-5,
-    #     celeba_path=r"D:\img_celeba",
-    # )

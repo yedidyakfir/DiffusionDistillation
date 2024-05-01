@@ -177,7 +177,7 @@ class GaussianDiffusionDefault(GaussianDiffusion):
             v = self.inference(z.float(), t.float() + 1, extra_args).sample.double()
             rec = (alpha * z - sigma * v).clip(-1, 1)
             z_1 = alpha_1 * rec + (sigma_1 / sigma) * (z - alpha * rec)
-            v_1 = self.inference(z_1.float(), t.float(), extra_args).double()
+            v_1 = self.inference(z_1.float(), t.float(), extra_args).sample.double()
             x_2 = (alpha_1 * z_1 - sigma_1 * v_1).clip(-1, 1)
             eps_2 = (z - alpha_s * x_2) / sigma_s
             v_2 = alpha_s * eps_2 - sigma_s * x_2
