@@ -71,7 +71,7 @@ def main(
         student_betas,
         teacher_ema_diffusion.time_scale * 2,
     )
-    train_student(
+    final_student = train_student(
         scheduler,
         student_optimizer,
         distill_train_loader,
@@ -80,6 +80,7 @@ def main(
         student_model,
         device,
     )
+    torch.save(final_student.net_.state_dict(), "final_student.pth")
 
 
 if __name__ == "__main__":

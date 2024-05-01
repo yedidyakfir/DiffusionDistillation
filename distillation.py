@@ -48,3 +48,4 @@ def train_student(
         moving_average(student_diffusion.net_, student_ema)
         if n > total_steps:
             break
+    return student_diffusion
