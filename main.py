@@ -51,10 +51,10 @@ def main(
     )
     total_steps = len(distill_train_loader)
 
-    teacher_model = UNet2DModel.from_pretrained("google/ddpm-cat-256", use_safetensors=True).to(
+    teacher_model = UNet2DModel.from_pretrained("google/ddpm-celebahq-256", use_safetensors=True).to(
         device
     )
-    student_model = UNet2DModel.from_pretrained("google/ddpm-cat-256", use_safetensors=True).to(
+    student_model = UNet2DModel.from_pretrained("google/ddpm-celebahq-256", use_safetensors=True).to(
         device
     )
     student_optimizer = AdamW(student_model.parameters(), lr=lr)
