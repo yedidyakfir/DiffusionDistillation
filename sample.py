@@ -7,8 +7,8 @@ from diffusers import UNet2DModel
 def load_model(model_path, device):
     net = UNet2DModel.from_pretrained("google/ddpm-cat-256", use_safetensors=True).to(
         device
-    )  # Initialize your network class
-    betas = make_beta_schedule("cosine", n_timestep=1000)  # Customize your beta schedule
+    )  # Initialize net class
+    betas = make_beta_schedule("cosine", n_timestep=1000)  # Customize beta 
     model = GaussianDiffusionDefault(net, betas.to(device), time_scale=1)#.to(device)
     checkpoint = torch.load(model_path, map_location=device)
     # model.load_state_dict(checkpoint['model_state_dict'])
