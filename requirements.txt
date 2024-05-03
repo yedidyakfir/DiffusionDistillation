@@ -1,6 +1,8 @@
-click
+click~=8.1.7
 torch~=2.2.1
 opencv-python~=4.9.0.80
 datasets~=2.18.0
 diffusers~=0.27.2
 torchvision~=0.17.1
+pillow~=10.2.0
+tqdm~=4.66.2
