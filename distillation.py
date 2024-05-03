@@ -46,6 +46,13 @@ def train_student(
         optimizer.step()
         scheduler.step()
         moving_average(student_diffusion.net_, student_ema)
+        if n % 100 == 0 or n == total_steps - 1:  # Save every 100 iterations and at the last iteration
+            torch.save({
+            'model_state_dict': student_diffusion.net_.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'scheduler_state_dict': scheduler.state_dict(),
+            'step': n
+            }, f'checkpoint_{n}.pth')
+
         if n > total_steps:
             break
-    return student_diffusion
