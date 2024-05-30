@@ -66,12 +66,6 @@ def main(batch_size: int, num_iters: int, device: int, n_timestep: int, time_sca
     dataset_class = getattr(dataset_module, f"{dataset}Dataset")
     train_dataset = dataset_class(dataset_path, transform)
 
-    # Use a subset of the dataset
-    # subset_size = 100  # 100 images only for inference
-    # indices = torch.randperm(len(train_dataset))[:subset_size]
-    # subset = torch.utils.data.Subset(train_dataset, indices)
-
-
     # Create a data loader for the training dataset
     distill_train_loader = torch.utils.data.DataLoader(
         train_dataset,
