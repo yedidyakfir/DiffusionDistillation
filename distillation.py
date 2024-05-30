@@ -5,7 +5,7 @@ from torch.optim.lr_scheduler import LRScheduler
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from diffusion2 import GaussianDiffusion
+from diffusion import GaussianDiffusion
 
 def moving_average(model, model_ema, beta=0.999, device=None):
     """
